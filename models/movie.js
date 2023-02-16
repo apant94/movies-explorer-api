@@ -27,7 +27,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => isURL(v),
-      message: 'Введите верный формат ссылки URL на аватар',
+      message: 'Введите верный формат ссылки URL на картинку',
     },
   },
   trailerLink: {
@@ -35,7 +35,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => isURL(v),
-      message: 'Введите верный формат ссылки URL на аватар',
+      message: 'Введите верный формат ссылки URL на трейлер',
     },
   },
   thumbnail: {
@@ -43,7 +43,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => isURL(v),
-      message: 'Введите верный формат ссылки URL на аватар',
+      message: 'Введите верный формат ссылки URL',
     },
   },
   owner: {
@@ -52,8 +52,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'movieid',
+    type: String,
     required: true,
   },
   nameRU: {
