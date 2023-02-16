@@ -5,7 +5,6 @@ const BadRequestError = require('../errors/BadRequestError');
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
-    .populate(['owner', 'likes'])
     .then((cards) => res.send({ data: cards }))
     .catch(next);
 };
