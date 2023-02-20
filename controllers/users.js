@@ -47,7 +47,7 @@ module.exports.editCurrentUser = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при обновлении профиля'));
       } else if (err.code === 11000) {
-        next(new ConflictError('Вы пытаетесь изменить email на уже существующий в базе'));
+        next(new ConflictError('Вы пытаетесь изменить уже существующий email'));
       } else {
         next(err);
       }
