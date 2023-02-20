@@ -18,7 +18,7 @@ module.exports.createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    .then((user) => res.send(user))
+    .then((user) => res.send({ email: user.email, name: user.name }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
@@ -40,7 +40,7 @@ module.exports.getCurrentUser = (req, res, next) => {
 module.exports.editCurrentUser = (req, res, next) => {
   const { email, name } = req.body;
 
-  User.findByIdAndUpdate(req.user._id, { email, name })
+  User.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true })
     .orFail(new NotFoundError('Пользователь с указанным id не найден'))
     .then((user) => res.send(user))
     .catch((err) => {
