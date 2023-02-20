@@ -6,7 +6,7 @@ module.exports.validateSignUp = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
-    name: Joi.string().min(2).max(20),
+    name: Joi.string().min(2).max(20).required(),
   }),
 });
 
@@ -19,7 +19,7 @@ module.exports.validateSignIn = celebrate({
 
 module.exports.validateEditCurrentUser = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required(),
+    name: Joi.string().min(2).max(20).required(),
     email: Joi.string().required().email(),
   }),
 });
@@ -29,7 +29,7 @@ module.exports.validateCreateMovie = celebrate({
     country: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),
-    year: Joi.number().required(),
+    year: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().regex(regex).required(),
     trailerLink: Joi.string().regex(regex).required(),
@@ -43,5 +43,5 @@ module.exports.validateCreateMovie = celebrate({
 module.exports.validateDeleteMovieById = celebrate({
   params: Joi.object().keys({
     _id: Joi.string().hex().length(24).required(),
-  }).unknown(true),
+  }),
 });
