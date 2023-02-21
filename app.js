@@ -8,14 +8,16 @@ const { errors } = require('celebrate');
 const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { rootErrorHandler } = require('./middlewares/rootErrorHandler');
+const { DB_ADRESS_DEV } = require('./utils/constants');
 
 const { PORT = 3000 } = process.env;
+const { NODE_ENV, DB_ADRESS } = process.env;
 
 const app = express();
 
 app.use(cors());
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb');
+mongoose.connect(NODE_ENV === 'production' ? DB_ADRESS : DB_ADRESS_DEV);
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
