@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
-const router = require('./routes/index');
+const { errors } = require('celebrate');
+const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { rootErrorHandler } = require('./middlewares/rootErrorHandler');
 
@@ -31,6 +32,7 @@ app.use(limiter);
 
 app.use(router);
 app.use(errorLogger);
+app.use(errors());
 app.use(rootErrorHandler);
 
 app.listen(PORT);

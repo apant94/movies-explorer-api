@@ -1,4 +1,4 @@
-const { celebrate, Joi } = require('celebrate');
+const { Joi, celebrate } = require('celebrate');
 
 const regex = /http[s]?:\/\/([\w.]+\/?)\S*/;
 
